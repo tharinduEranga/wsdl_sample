@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="tns:wpg"
+           targetNamespace="tns:wpg" elementFormDefault="qualified">
+
+    <xs:element name="tokenSettle">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="vendorID" type="xs:string"/>
+                <xs:element name="transID" type="xs:string"/>
+                <xs:element name="userID" type="xs:string"/>
+                <xs:element name="method" type="xs:string"/>
+                <xs:element name="customerPresent" type="xs:string"/>
+                <xs:element name="token" type="xs:string"/>
+                <xs:element name="authCode" type="xs:string"/>
+                <xs:element name="description" type="xs:string"/>
+                <xs:element name="value" type="xs:string"/>
+                <xs:element name="timestamp" type="xs:string"/>
+                <xs:element name="region" type="xs:string"/>
+                <xs:element name="security" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="tokenSettleResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="returnCode" type="xs:string"/>
+                <xs:element name="returnMessage" type="xs:string"/>
+                <xs:element name="transID" type="xs:string"/>
+                <xs:element name="userID" type="xs:string"/>
+                <xs:element name="merchantResponse" type="xs:string"/>
+                <xs:element name="merchantID" type="xs:string"/>
+                <xs:element name="value" type="xs:string"/>
+                <xs:element name="authCode" type="xs:string"/>
+                <xs:element name="acquirerID" type="xs:string"/>
+                <xs:element name="acquirerName" type="xs:string"/>
+                <xs:element name="bankID" type="xs:string"/>
+                <xs:element name="bankName" type="xs:string"/>
+                <xs:element name="maskCardNumber" type="xs:string"/>
+                <xs:element name="cardExpiry" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

@@ -1,0 +1,902 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="wsdl-viewer.xsl"?>
+<wsdl:definitions name="wpg" targetNamespace="http://www.wileypay.com/WPG_V1" xmlns:tns="http://www.wileypay.com/WPG_V1"
+                  xmlns:esxsd="http://www.wileypay.com/wpg.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://www.wileypay.com/wpg.xsd">
+            <xsd:element name="vendorID" type="xsd:int">
+                <xsd:annotation>
+                    <xsd:documentation>Contains vendor allocated identity number.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="transID" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the vendor specified transaction number that specifically refers to this
+                        current transaction.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="userID" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the user name used to cross reference for permission to use the PED
+                        device.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="PEDIP" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the IP address of the agents work station to which the agent's PED
+                        device is connected.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="method" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the method with which to process this transation. Must always be set to
+                        'SOAP'. (RESERVED FOR FUTURE USE)
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="customerPresent" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the where this transaction is with the customer present or not.
+                        (RESERVED FOR FUTURE USE)
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="timestamp" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the time stamp of the number if seconds since the Epoch (00:00:00 on
+                        01/01/1970).
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="region" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the region the vendor would like the transaction settle through.
+                        Presently only EMEA is available and MUST be passed. (RESERVED FOR FUTURE USE)
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="mode" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the mode of which to perform a probe on the WPG.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="type" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the type of probe to perform on the WPG.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="security" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the security countermeasure to prevent tampering with data during
+                        transmission.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="returnCode" type="xsd:int">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the WPG return code for this transaction.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="returnMessage" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the WPG return message for this transaction.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="accessToken" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the access token required for subsequent use of the PED device. Only
+                        obtained from Probe function.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="description" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the vendor specific details to do with this transaction. This is not
+                        typically shown to the customer.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="value" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the value that the vendor wishes to transact with the customer.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="currency" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the currency the vendor would like to transact with the customer.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="allowCSCFail" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains a flag to signal that the vendor is willing to accept an Card Security
+                        Check (CSC) failure.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="allowAVSFail" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains a flag to signal that the vendor is willing to accept an Address
+                        Verification System (AVS) failure.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="merchantResponse" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains a message from the merchant service regarding the transaction.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="merchantID" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the merchant ID number used for this transaction.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="CSCResult" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the result of the Card Verification Check for this transaction.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="AVSPostResult" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the results of the post code portion of the Address Verification System
+                        check for this transaction.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="AVSAddrResult" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the results of the address numerics portion of the Address Verification
+                        System check for this transaction.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="token" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the tokenised version of the payment card presented by the user.
+                        Contains the first 6 and last 4 digits of the REAL card number with the remainder substituded
+                        with random digits.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="authCode" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the authorisation code provided by the acquiring bank for this
+                        transaction.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="acquirerID" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the single letter identifier for the acquiring bank.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="acquirerName" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the name identifier for the acquiring bank.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="bankID" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the single letter identifier for the merchant bank.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="bankName" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the name identifier for the merchant bank.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="maskedCardNumber" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the obfusicated payment card number for use on reciepts.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="cardExpiry" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the payment card expiry date (MMYY).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="cardStart" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the payment card start date (MMYY).</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="cardPAN" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the payment card number, used for tokenisation only.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="AVSPost" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the numeric elements of the customers address .</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="AVSAddr" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the numeric elements of the customers post code.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="obtained" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the result of whether a telephone authorisation has been obtained.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="countryCode" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains the ISO country code of the customer.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="merchantReference" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Contains reference supplied by merchant.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="authTransID" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>For settle transactions this is the authorisation transaction ID
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="orderId" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>This is the Order Id generated in Hybris</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="operation" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>The Wiley Payment Gateway Operation Type</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:schema>
+        <xsd:schema targetNamespace="http://www.wileypay.com/WPG_V1">
+            <xsd:element name="in" type="xsd:string"/>
+            <xsd:element name="out" type="xsd:string"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="probeRequest">
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="userID" element="esxsd:userID"/>
+        <wsdl:part name="PEDIP" element="esxsd:PEDIP"/>
+        <wsdl:part name="method" element="esxsd:method"/>
+        <wsdl:part name="customerPresent" element="esxsd:customerPresent"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+        <wsdl:part name="region" element="esxsd:region"/>
+        <wsdl:part name="mode" element="esxsd:mode"/>
+        <wsdl:part name="type" element="esxsd:type"/>
+        <wsdl:part name="security" element="esxsd:security"/>
+    </wsdl:message>
+    <wsdl:message name="probeResponse">
+        <wsdl:part name="returnCode" element="esxsd:returnCode"/>
+        <wsdl:part name="returnMessage" element="esxsd:returnMessage"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="accessToken" element="esxsd:accessToken"/>
+        <wsdl:part name="userID" element="esxsd:userID"/>
+        <wsdl:part name="operation" element="esxsd:operation"/>
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+    </wsdl:message>
+    <wsdl:message name="validateRequest">
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="userID" element="esxsd:userID"/>
+        <wsdl:part name="PEDIP" element="esxsd:PEDIP"/>
+        <wsdl:part name="method" element="esxsd:method"/>
+        <wsdl:part name="customerPresent" element="esxsd:customerPresent"/>
+        <wsdl:part name="description" element="esxsd:description"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+        <wsdl:part name="region" element="esxsd:region"/>
+        <wsdl:part name="AVSPost" element="esxsd:AVSPost"/>
+        <wsdl:part name="AVSAddr" element="esxsd:AVSAddr"/>
+        <wsdl:part name="countryCode" element="esxsd:countryCode"/>
+        <wsdl:part name="allowCSCFail" element="esxsd:allowCSCFail"/>
+        <wsdl:part name="allowAVSFail" element="esxsd:allowAVSFail"/>
+        <wsdl:part name="accessToken" element="esxsd:accessToken"/>
+        <wsdl:part name="security" element="esxsd:security"/>
+    </wsdl:message>
+    <wsdl:message name="validateResponse">
+        <wsdl:part name="returnCode" element="esxsd:returnCode"/>
+        <wsdl:part name="returnMessage" element="esxsd:returnMessage"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="merchantResponse" element="esxsd:merchantResponse"/>
+        <wsdl:part name="merchantID" element="esxsd:merchantID"/>
+        <wsdl:part name="CSCResult" element="esxsd:CSCResult"/>
+        <wsdl:part name="AVSPostResult" element="esxsd:AVSPostResult"/>
+        <wsdl:part name="AVSAddrResult" element="esxsd:AVSAddrResult"/>
+        <wsdl:part name="token" element="esxsd:token"/>
+        <wsdl:part name="acquirerID" element="esxsd:acquirerID"/>
+        <wsdl:part name="acquirerName" element="esxsd:acquirerName"/>
+        <wsdl:part name="bankID" element="esxsd:bankID"/>
+        <wsdl:part name="bankName" element="esxsd:bankName"/>
+        <wsdl:part name="maskedCardNumber" element="esxsd:maskedCardNumber"/>
+        <wsdl:part name="cardExpiry" element="esxsd:cardExpiry"/>
+        <wsdl:part name="operation" element="esxsd:operation"/>
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+    </wsdl:message>
+    <wsdl:message name="authoriseSettleRequest">
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="userID" element="esxsd:userID"/>
+        <wsdl:part name="PEDIP" element="esxsd:PEDIP"/>
+        <wsdl:part name="method" element="esxsd:method"/>
+        <wsdl:part name="customerPresent" element="esxsd:customerPresent"/>
+        <wsdl:part name="description" element="esxsd:description"/>
+        <wsdl:part name="value" element="esxsd:value"/>
+        <wsdl:part name="currency" element="esxsd:currency"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+        <wsdl:part name="region" element="esxsd:region"/>
+        <wsdl:part name="AVSPost" element="esxsd:AVSPost"/>
+        <wsdl:part name="AVSAddr" element="esxsd:AVSAddr"/>
+        <wsdl:part name="countryCode" element="esxsd:countryCode"/>
+        <wsdl:part name="allowCSCFail" element="esxsd:allowCSCFail"/>
+        <wsdl:part name="allowAVSFail" element="esxsd:allowAVSFail"/>
+        <wsdl:part name="accessToken" element="esxsd:accessToken"/>
+        <wsdl:part name="security" element="esxsd:security"/>
+    </wsdl:message>
+    <wsdl:message name="authoriseSettleResponse">
+        <wsdl:part name="returnCode" element="esxsd:returnCode"/>
+        <wsdl:part name="returnMessage" element="esxsd:returnMessage"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="merchantResponse" element="esxsd:merchantResponse"/>
+        <wsdl:part name="merchantID" element="esxsd:merchantID"/>
+        <wsdl:part name="value" element="esxsd:value"/>
+        <wsdl:part name="CSCResult" element="esxsd:CSCResult"/>
+        <wsdl:part name="AVSPostResult" element="esxsd:AVSPostResult"/>
+        <wsdl:part name="AVSAddrResult" element="esxsd:AVSAddrResult"/>
+        <wsdl:part name="token" element="esxsd:token"/>
+        <wsdl:part name="authCode" element="esxsd:authCode"/>
+        <wsdl:part name="acquirerID" element="esxsd:acquirerID"/>
+        <wsdl:part name="acquirerName" element="esxsd:acquirerName"/>
+        <wsdl:part name="bankID" element="esxsd:bankID"/>
+        <wsdl:part name="bankName" element="esxsd:bankName"/>
+        <wsdl:part name="maskedCardNumber" element="esxsd:maskedCardNumber"/>
+        <wsdl:part name="cardExpiry" element="esxsd:cardExpiry"/>
+        <wsdl:part name="operation" element="esxsd:operation"/>
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+    </wsdl:message>
+    <wsdl:message name="authoriseRequest">
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="userID" element="esxsd:userID"/>
+        <wsdl:part name="PEDIP" element="esxsd:PEDIP"/>
+        <wsdl:part name="method" element="esxsd:method"/>
+        <wsdl:part name="customerPresent" element="esxsd:customerPresent"/>
+        <wsdl:part name="description" element="esxsd:description"/>
+        <wsdl:part name="value" element="esxsd:value"/>
+        <wsdl:part name="currency" element="esxsd:currency"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+        <wsdl:part name="region" element="esxsd:region"/>
+        <wsdl:part name="AVSPost" element="esxsd:AVSPost"/>
+        <wsdl:part name="AVSAddr" element="esxsd:AVSAddr"/>
+        <wsdl:part name="countryCode" element="esxsd:countryCode"/>
+        <wsdl:part name="allowCSCFail" element="esxsd:allowCSCFail"/>
+        <wsdl:part name="allowAVSFail" element="esxsd:allowAVSFail"/>
+        <wsdl:part name="accessToken" element="esxsd:accessToken"/>
+        <wsdl:part name="security" element="esxsd:security"/>
+    </wsdl:message>
+    <wsdl:message name="authoriseResponse">
+        <wsdl:part name="returnCode" element="esxsd:returnCode"/>
+        <wsdl:part name="returnMessage" element="esxsd:returnMessage"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="merchantResponse" element="esxsd:merchantResponse"/>
+        <wsdl:part name="merchantID" element="esxsd:merchantID"/>
+        <wsdl:part name="value" element="esxsd:value"/>
+        <wsdl:part name="CSCResult" element="esxsd:CSCResult"/>
+        <wsdl:part name="AVSPostResult" element="esxsd:AVSPostResult"/>
+        <wsdl:part name="AVSAddrResult" element="esxsd:AVSAddrResult"/>
+        <wsdl:part name="token" element="esxsd:token"/>
+        <wsdl:part name="authCode" element="esxsd:authCode"/>
+        <wsdl:part name="acquirerID" element="esxsd:acquirerID"/>
+        <wsdl:part name="acquirerName" element="esxsd:acquirerName"/>
+        <wsdl:part name="bankID" element="esxsd:bankID"/>
+        <wsdl:part name="bankName" element="esxsd:bankName"/>
+        <wsdl:part name="maskedCardNumber" element="esxsd:maskedCardNumber"/>
+        <wsdl:part name="cardExpiry" element="esxsd:cardExpiry"/>
+        <wsdl:part name="merchantReference" element="esxsd:merchantReference"/>
+        <wsdl:part name="operation" element="esxsd:operation"/>
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+    </wsdl:message>
+    <wsdl:message name="tokenAuthoriseSettleRequest">
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="userID" element="esxsd:userID"/>
+        <wsdl:part name="method" element="esxsd:method"/>
+        <wsdl:part name="customerPresent" element="esxsd:customerPresent"/>
+        <wsdl:part name="token" element="esxsd:token"/>
+        <wsdl:part name="description" element="esxsd:description"/>
+        <wsdl:part name="value" element="esxsd:value"/>
+        <wsdl:part name="currency" element="esxsd:currency"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+        <wsdl:part name="region" element="esxsd:region"/>
+        <wsdl:part name="AVSPost" element="esxsd:AVSPost"/>
+        <wsdl:part name="AVSAddr" element="esxsd:AVSAddr"/>
+        <wsdl:part name="countryCode" element="esxsd:countryCode"/>
+        <wsdl:part name="allowCSCFail" element="esxsd:allowCSCFail"/>
+        <wsdl:part name="allowAVSFail" element="esxsd:allowAVSFail"/>
+        <wsdl:part name="security" element="esxsd:security"/>
+    </wsdl:message>
+    <wsdl:message name="tokenAuthoriseSettleResponse">
+        <wsdl:part name="returnCode" element="esxsd:returnCode"/>
+        <wsdl:part name="returnMessage" element="esxsd:returnMessage"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="merchantResponse" element="esxsd:merchantResponse"/>
+        <wsdl:part name="merchantID" element="esxsd:merchantID"/>
+        <wsdl:part name="value" element="esxsd:value"/>
+        <wsdl:part name="CSCResult" element="esxsd:CSCResult"/>
+        <wsdl:part name="AVSPostResult" element="esxsd:AVSPostResult"/>
+        <wsdl:part name="AVSAddrResult" element="esxsd:AVSAddrResult"/>
+        <wsdl:part name="authCode" element="esxsd:authCode"/>
+        <wsdl:part name="acquirerID" element="esxsd:acquirerID"/>
+        <wsdl:part name="acquirerName" element="esxsd:acquirerName"/>
+        <wsdl:part name="bankID" element="esxsd:bankID"/>
+        <wsdl:part name="bankName" element="esxsd:bankName"/>
+        <wsdl:part name="maskedCardNumber" element="esxsd:maskedCardNumber"/>
+        <wsdl:part name="cardExpiry" element="esxsd:cardExpiry"/>
+        <wsdl:part name="operation" element="esxsd:operation"/>
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+    </wsdl:message>
+    <wsdl:message name="tokenAuthoriseRequest">
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="userID" element="esxsd:userID"/>
+        <wsdl:part name="method" element="esxsd:method"/>
+        <wsdl:part name="customerPresent" element="esxsd:customerPresent"/>
+        <wsdl:part name="token" element="esxsd:token"/>
+        <wsdl:part name="description" element="esxsd:description"/>
+        <wsdl:part name="value" element="esxsd:value"/>
+        <wsdl:part name="currency" element="esxsd:currency"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+        <wsdl:part name="region" element="esxsd:region"/>
+        <wsdl:part name="AVSPost" element="esxsd:AVSPost"/>
+        <wsdl:part name="AVSAddr" element="esxsd:AVSAddr"/>
+        <wsdl:part name="countryCode" element="esxsd:countryCode"/>
+        <wsdl:part name="allowCSCFail" element="esxsd:allowCSCFail"/>
+        <wsdl:part name="allowAVSFail" element="esxsd:allowAVSFail"/>
+        <wsdl:part name="security" element="esxsd:security"/>
+    </wsdl:message>
+    <wsdl:message name="tokenAuthoriseResponse">
+        <wsdl:part name="returnCode" element="esxsd:returnCode"/>
+        <wsdl:part name="returnMessage" element="esxsd:returnMessage"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="merchantResponse" element="esxsd:merchantResponse"/>
+        <wsdl:part name="merchantID" element="esxsd:merchantID"/>
+        <wsdl:part name="value" element="esxsd:value"/>
+        <wsdl:part name="CSCResult" element="esxsd:CSCResult"/>
+        <wsdl:part name="AVSPostResult" element="esxsd:AVSPostResult"/>
+        <wsdl:part name="AVSAddrResult" element="esxsd:AVSAddrResult"/>
+        <wsdl:part name="authCode" element="esxsd:authCode"/>
+        <wsdl:part name="acquirerID" element="esxsd:acquirerID"/>
+        <wsdl:part name="acquirerName" element="esxsd:acquirerName"/>
+        <wsdl:part name="bankID" element="esxsd:bankID"/>
+        <wsdl:part name="bankName" element="esxsd:bankName"/>
+        <wsdl:part name="maskedCardNumber" element="esxsd:maskedCardNumber"/>
+        <wsdl:part name="cardExpiry" element="esxsd:cardExpiry"/>
+        <wsdl:part name="merchantReference" element="esxsd:merchantReference"/>
+        <wsdl:part name="operation" element="esxsd:operation"/>
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+    </wsdl:message>
+    <wsdl:message name="tokenSettleRequest">
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="userID" element="esxsd:userID"/>
+        <wsdl:part name="method" element="esxsd:method"/>
+        <wsdl:part name="customerPresent" element="esxsd:customerPresent"/>
+        <wsdl:part name="token" element="esxsd:token"/>
+        <wsdl:part name="authCode" element="esxsd:authCode"/>
+        <wsdl:part name="description" element="esxsd:description"/>
+        <wsdl:part name="value" element="esxsd:value"/>
+        <wsdl:part name="currency" element="esxsd:currency"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+        <wsdl:part name="region" element="esxsd:region"/>
+        <wsdl:part name="security" element="esxsd:security"/>
+    </wsdl:message>
+    <wsdl:message name="tokenSettleResponse">
+        <wsdl:part name="returnCode" element="esxsd:returnCode"/>
+        <wsdl:part name="returnMessage" element="esxsd:returnMessage"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="merchantResponse" element="esxsd:merchantResponse"/>
+        <wsdl:part name="merchantID" element="esxsd:merchantID"/>
+        <wsdl:part name="value" element="esxsd:value"/>
+        <wsdl:part name="acquirerID" element="esxsd:acquirerID"/>
+        <wsdl:part name="acquirerName" element="esxsd:acquirerName"/>
+        <wsdl:part name="bankID" element="esxsd:bankID"/>
+        <wsdl:part name="bankName" element="esxsd:bankName"/>
+        <wsdl:part name="maskedCardNumber" element="esxsd:maskedCardNumber"/>
+        <wsdl:part name="cardExpiry" element="esxsd:cardExpiry"/>
+        <wsdl:part name="merchantReference" element="esxsd:merchantReference"/>
+        <wsdl:part name="authTransID" element="esxsd:authTransID"/>
+        <wsdl:part name="operation" element="esxsd:operation"/>
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+    </wsdl:message>
+    <wsdl:message name="refundRequest">
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="userID" element="esxsd:userID"/>
+        <wsdl:part name="PEDIP" element="esxsd:PEDIP"/>
+        <wsdl:part name="method" element="esxsd:method"/>
+        <wsdl:part name="customerPresent" element="esxsd:customerPresent"/>
+        <wsdl:part name="description" element="esxsd:description"/>
+        <wsdl:part name="value" element="esxsd:value"/>
+        <wsdl:part name="currency" element="esxsd:currency"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+        <wsdl:part name="region" element="esxsd:region"/>
+        <wsdl:part name="AVSPost" element="esxsd:AVSPost"/>
+        <wsdl:part name="AVSAddr" element="esxsd:AVSAddr"/>
+        <wsdl:part name="countryCode" element="esxsd:countryCode"/>
+        <wsdl:part name="allowCSCFail" element="esxsd:allowCSCFail"/>
+        <wsdl:part name="allowAVSFail" element="esxsd:allowAVSFail"/>
+        <wsdl:part name="accessToken" element="esxsd:accessToken"/>
+        <wsdl:part name="security" element="esxsd:security"/>
+    </wsdl:message>
+    <wsdl:message name="refundResponse">
+        <wsdl:part name="returnCode" element="esxsd:returnCode"/>
+        <wsdl:part name="returnMessage" element="esxsd:returnMessage"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="merchantResponse" element="esxsd:merchantResponse"/>
+        <wsdl:part name="merchantID" element="esxsd:merchantID"/>
+        <wsdl:part name="value" element="esxsd:value"/>
+        <wsdl:part name="CSCResult" element="esxsd:CSCResult"/>
+        <wsdl:part name="AVSPostResult" element="esxsd:AVSPostResult"/>
+        <wsdl:part name="AVSAddrResult" element="esxsd:AVSAddrResult"/>
+        <wsdl:part name="token" element="esxsd:token"/>
+        <wsdl:part name="authCode" element="esxsd:authCode"/>
+        <wsdl:part name="acquirerID" element="esxsd:acquirerID"/>
+        <wsdl:part name="acquirerName" element="esxsd:acquirerName"/>
+        <wsdl:part name="bankID" element="esxsd:bankID"/>
+        <wsdl:part name="bankName" element="esxsd:bankName"/>
+        <wsdl:part name="maskedCardNumber" element="esxsd:maskedCardNumber"/>
+        <wsdl:part name="cardExpiry" element="esxsd:cardExpiry"/>
+        <wsdl:part name="operation" element="esxsd:operation"/>
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+    </wsdl:message>
+    <wsdl:message name="tokenRefundRequest">
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="userID" element="esxsd:userID"/>
+        <wsdl:part name="method" element="esxsd:method"/>
+        <wsdl:part name="customerPresent" element="esxsd:customerPresent"/>
+        <wsdl:part name="token" element="esxsd:token"/>
+        <wsdl:part name="description" element="esxsd:description"/>
+        <wsdl:part name="value" element="esxsd:value"/>
+        <wsdl:part name="currency" element="esxsd:currency"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+        <wsdl:part name="region" element="esxsd:region"/>
+        <wsdl:part name="security" element="esxsd:security"/>
+    </wsdl:message>
+    <wsdl:message name="tokenRefundResponse">
+        <wsdl:part name="returnCode" element="esxsd:returnCode"/>
+        <wsdl:part name="returnMessage" element="esxsd:returnMessage"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="merchantResponse" element="esxsd:merchantResponse"/>
+        <wsdl:part name="merchantID" element="esxsd:merchantID"/>
+        <wsdl:part name="value" element="esxsd:value"/>
+        <wsdl:part name="authCode" element="esxsd:authCode"/>
+        <wsdl:part name="acquirerID" element="esxsd:acquirerID"/>
+        <wsdl:part name="acquirerName" element="esxsd:acquirerName"/>
+        <wsdl:part name="bankID" element="esxsd:bankID"/>
+        <wsdl:part name="bankName" element="esxsd:bankName"/>
+        <wsdl:part name="maskedCardNumber" element="esxsd:maskedCardNumber"/>
+        <wsdl:part name="cardExpiry" element="esxsd:cardExpiry"/>
+        <wsdl:part name="operation" element="esxsd:operation"/>
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+    </wsdl:message>
+    <wsdl:message name="manualAuthRequest">
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="userID" element="esxsd:userID"/>
+        <wsdl:part name="PEDIP" element="esxsd:PEDIP"/>
+        <wsdl:part name="method" element="esxsd:method"/>
+        <wsdl:part name="customerPresent" element="esxsd:customerPresent"/>
+        <wsdl:part name="obtained" element="esxsd:obtained"/>
+        <wsdl:part name="token" element="esxsd:token"/>
+        <wsdl:part name="authCode" element="esxsd:authCode"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+        <wsdl:part name="region" element="esxsd:region"/>
+        <wsdl:part name="accessToken" element="esxsd:accessToken"/>
+        <wsdl:part name="security" element="esxsd:security"/>
+    </wsdl:message>
+    <wsdl:message name="manualAuthResponse">
+        <wsdl:part name="returnCode" element="esxsd:returnCode"/>
+        <wsdl:part name="returnMessage" element="esxsd:returnMessage"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="merchantResponse" element="esxsd:merchantResponse"/>
+        <wsdl:part name="merchantID" element="esxsd:merchantID"/>
+        <wsdl:part name="value" element="esxsd:value"/>
+        <wsdl:part name="CSCResult" element="esxsd:CSCResult"/>
+        <wsdl:part name="AVSPostResult" element="esxsd:AVSPostResult"/>
+        <wsdl:part name="AVSAddrResult" element="esxsd:AVSAddrResult"/>
+        <wsdl:part name="token" element="esxsd:token"/>
+        <wsdl:part name="authCode" element="esxsd:authCode"/>
+        <wsdl:part name="acquirerID" element="esxsd:acquirerID"/>
+        <wsdl:part name="acquirerName" element="esxsd:acquirerName"/>
+        <wsdl:part name="bankID" element="esxsd:bankID"/>
+        <wsdl:part name="bankName" element="esxsd:bankName"/>
+        <wsdl:part name="maskedCardNumber" element="esxsd:maskedCardNumber"/>
+        <wsdl:part name="cardExpiry" element="esxsd:cardExpiry"/>
+        <wsdl:part name="operation" element="esxsd:operation"/>
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+    </wsdl:message>
+    <wsdl:message name="tokeniseRequest">
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="userID" element="esxsd:userID"/>
+        <wsdl:part name="method" element="esxsd:method"/>
+        <wsdl:part name="customerPresent" element="esxsd:customerPresent"/>
+        <wsdl:part name="cardPAN" element="esxsd:cardPAN"/>
+        <wsdl:part name="cardStart" element="esxsd:cardStart"/>
+        <wsdl:part name="cardExpiry" element="esxsd:cardExpiry"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+        <wsdl:part name="region" element="esxsd:region"/>
+        <wsdl:part name="security" element="esxsd:security"/>
+    </wsdl:message>
+    <wsdl:message name="tokeniseResponse">
+        <wsdl:part name="returnCode" element="esxsd:returnCode"/>
+        <wsdl:part name="returnMessage" element="esxsd:returnMessage"/>
+        <wsdl:part name="merchantResponse" element="esxsd:merchantResponse"/>
+        <wsdl:part name="merchantID" element="esxsd:merchantID"/>
+        <wsdl:part name="token" element="esxsd:token"/>
+        <wsdl:part name="acquirerID" element="esxsd:acquirerID"/>
+        <wsdl:part name="acquirerName" element="esxsd:acquirerName"/>
+        <wsdl:part name="bankID" element="esxsd:bankID"/>
+        <wsdl:part name="bankName" element="esxsd:bankName"/>
+        <wsdl:part name="maskedCardNumber" element="esxsd:maskedCardNumber"/>
+        <wsdl:part name="cardExpiry" element="esxsd:cardExpiry"/>
+        <wsdl:part name="operation" element="esxsd:operation"/>
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+    </wsdl:message>
+    <wsdl:message name="tokenReversalRequest">
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="userID" element="esxsd:userID"/>
+        <wsdl:part name="method" element="esxsd:method"/>
+        <wsdl:part name="token" element="esxsd:token"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+        <wsdl:part name="region" element="esxsd:region"/>
+        <wsdl:part name="security" element="esxsd:security"/>
+    </wsdl:message>
+    <wsdl:message name="tokenReversalResponse">
+        <wsdl:part name="returnCode" element="esxsd:returnCode"/>
+        <wsdl:part name="returnMessage" element="esxsd:returnMessage"/>
+        <wsdl:part name="merchantResponse" element="esxsd:merchantResponse"/>
+        <wsdl:part name="merchantID" element="esxsd:merchantID"/>
+        <wsdl:part name="cardPAN" element="esxsd:cardPAN"/>
+        <wsdl:part name="acquirerID" element="esxsd:acquirerID"/>
+        <wsdl:part name="acquirerName" element="esxsd:acquirerName"/>
+        <wsdl:part name="cardExpiry" element="esxsd:cardExpiry"/>
+        <wsdl:part name="operation" element="esxsd:operation"/>
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+    </wsdl:message>
+    <wsdl:message name="hybrisauthRequest">
+        <wsdl:part name="vendorID" element="esxsd:vendorID"/>
+        <wsdl:part name="transID" element="esxsd:transID"/>
+        <wsdl:part name="userID" element="esxsd:userID"/>
+        <wsdl:part name="PEDIP" element="esxsd:PEDIP"/>
+        <wsdl:part name="method" element="esxsd:method"/>
+        <wsdl:part name="timestamp" element="esxsd:timestamp"/>
+        <wsdl:part name="token" element="esxsd:token"/>
+        <wsdl:part name="authCode" element="esxsd:authCode"/>
+        <wsdl:part name="orderId" element="esxsd:orderId"/>
+        <wsdl:part name="security" element="esxsd:security"/>
+    </wsdl:message>
+    <wsdl:message name="hybrisauthResponse">
+        <wsdl:part name="returnCode" element="esxsd:returnCode"/>
+        <wsdl:part name="returnMessage" element="esxsd:returnMessage"/>
+    </wsdl:message>
+    <wsdl:portType name="wpgPort">
+        <wsdl:operation name="probe">
+            <wsdl:documentation>Method for performing a probe on the WPG.</wsdl:documentation>
+            <wsdl:input message="tns:probeRequest"/>
+            <wsdl:output message="tns:probeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="validate">
+            <wsdl:documentation>Method for performing a validate operation on the WPG.</wsdl:documentation>
+            <wsdl:input message="tns:validateRequest"/>
+            <wsdl:output message="tns:validateResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="authoriseSettle">
+            <wsdl:documentation>Method for performing a authorise and settle operation on the WPG.</wsdl:documentation>
+            <wsdl:input message="tns:authoriseSettleRequest"/>
+            <wsdl:output message="tns:authoriseSettleResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="authorise">
+            <wsdl:documentation>Method for performing a authorise and settle operation on the WPG.</wsdl:documentation>
+            <wsdl:input message="tns:authoriseRequest"/>
+            <wsdl:output message="tns:authoriseResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="tokenAuthoriseSettle">
+            <wsdl:documentation>Method for performing a tokenised authorise and settle operation on the WPG.
+            </wsdl:documentation>
+            <wsdl:input message="tns:tokenAuthoriseSettleRequest"/>
+            <wsdl:output message="tns:tokenAuthoriseSettleResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="tokenAuthorise">
+            <wsdl:documentation>Method for performing a tokenised authorise operation on the WPG.</wsdl:documentation>
+            <wsdl:input message="tns:tokenAuthoriseRequest"/>
+            <wsdl:output message="tns:tokenAuthoriseResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="tokenSettle">
+            <wsdl:documentation>Method for performing a tokenised settle operation on the WPG.</wsdl:documentation>
+            <wsdl:input message="tns:tokenSettleRequest"/>
+            <wsdl:output message="tns:tokenSettleResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="refund">
+            <wsdl:documentation>Method for performing a refund operation on the WPG.</wsdl:documentation>
+            <wsdl:input message="tns:refundRequest"/>
+            <wsdl:output message="tns:refundResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="tokenRefund">
+            <wsdl:documentation>Method for performing a tokenised refund operation on the WPG.</wsdl:documentation>
+            <wsdl:input message="tns:tokenRefundRequest"/>
+            <wsdl:output message="tns:tokenRefundResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="manualAuth">
+            <wsdl:documentation>Method for performing a manual authorisation operation on the WPG. This is in response
+                to a telephone authorisation request.
+            </wsdl:documentation>
+            <wsdl:input message="tns:manualAuthRequest"/>
+            <wsdl:output message="tns:manualAuthResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="tokenise">
+            <wsdl:documentation>Method for performing a tokenise operation on the WPG. This will be performed as a one
+                off exercise on WPG implementation.
+            </wsdl:documentation>
+            <wsdl:input message="tns:tokeniseRequest"/>
+            <wsdl:output message="tns:tokeniseResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="tokenReversal">
+            <wsdl:documentation>Method for performing a token reversal operation on the WPG. Used to retrieve the card
+                PAN relating to a token.
+            </wsdl:documentation>
+            <wsdl:input message="tns:tokenReversalRequest"/>
+            <wsdl:output message="tns:tokenReversalResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="hybrisauth">
+            <wsdl:documentation>Method to store Hybris authorise data into WPG Table.</wsdl:documentation>
+            <wsdl:input message="tns:hybrisauthRequest"/>
+            <wsdl:output message="tns:hybrisauthResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="wpgSOAP" type="tns:wpgPort">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="probe">
+            <soap:operation soapAction="tns:wpg#probe"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="validate">
+            <soap:operation soapAction="tns:wpg#validate"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="authoriseSettle">
+            <soap:operation soapAction="tns:wpg#authoriseSettle"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="authorise">
+            <soap:operation soapAction="tns:wpg#authorise"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="tokenAuthoriseSettle">
+            <soap:operation soapAction="tns:wpg#tokenAuthoriseSettle"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="tokenAuthorise">
+            <soap:operation soapAction="tns:wpg#tokenAuthorise"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="tokenSettle">
+            <soap:operation soapAction="tns:wpg#tokenSettle"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="refund">
+            <soap:operation soapAction="tns:wpg#refund"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="tokenRefund">
+            <soap:operation soapAction="tns:wpg#tokenRefund"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="manualAuth">
+            <soap:operation soapAction="tns:wpg#manualAuth"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="tokenise">
+            <soap:operation soapAction="tns:wpg#tokenise"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="tokenReversal">
+            <soap:operation soapAction="tns:wpg#tokenReversal"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="hybrisauth">
+            <soap:operation soapAction="tns:wpg#hybrisauth"/>
+            <wsdl:input>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" namespace="tns:wpg"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="WileyPaymentGateway_V1">
+        <wsdl:port binding="tns:wpgSOAP" name="wpgSOAP">
+            <soap:address location="https://soap-sandbox.wileypay.com/advocate.php"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

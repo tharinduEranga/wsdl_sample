@@ -1,0 +1,161 @@
+<wsdl:definitions name="JPCMSUpdateAssemblyServiceImplService"
+	targetNamespace="http://service.update.integration.jpcms.wiley.com/"
+	xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://service.update.integration.jpcms.wiley.com/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<wsdl:types>
+		<xs:schema elementFormDefault="unqualified"
+			targetNamespace="http://service.update.integration.jpcms.wiley.com/"
+			version="1.0" xmlns:tns="http://service.update.integration.jpcms.wiley.com/"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema">
+			<xs:element name="jpcmsLicenseUpdateResponse" type="tns:jpcmsUpdateAssemblyResult" />
+			<xs:element name="updateAssemblyDetails" type="tns:updateAssemblyDetails" />
+			<xs:element name="updateAssemblyDetailsResponse" type="tns:updateAssemblyDetailsResponse" />
+			<xs:complexType name="updateAssemblyDetails">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="clientId" type="xs:string" />
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="update"
+						type="tns:assemblyUpdate" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="assemblyUpdate">
+				<xs:sequence>
+					<xs:element name="dataPayload">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" name="data" type="tns:data" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="identifiers">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" name="identifier"
+									type="tns:identifier" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="assemblyType" type="tns:assemblyType"
+					use="required" />
+			</xs:complexType>
+			<xs:complexType name="data">
+				<xs:simpleContent>
+					<xs:extension base="xs:string">
+						<xs:attribute name="type" type="tns:dataType" use="required" />
+					</xs:extension>
+				</xs:simpleContent>
+			</xs:complexType>
+			<xs:complexType name="identifier">
+				<xs:simpleContent>
+					<xs:extension base="xs:string">
+						<xs:attribute name="type" type="tns:identifierType"
+							use="required" />
+					</xs:extension>
+				</xs:simpleContent>
+			</xs:complexType>
+			<xs:complexType name="updateAssemblyDetailsResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="return"
+						type="tns:jpcmsUpdateAssemblyResult" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="jpcmsUpdateAssemblyResult">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0"
+						name="assemblyUpdateResults" type="tns:assemblyUpdateResult" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="assemblyUpdateResult">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="assemblyType" type="xs:string" />
+					<xs:element minOccurs="0" name="errorCode" type="tns:errorCode" />
+					<xs:element minOccurs="0" name="identifier" type="xs:string" />
+					<xs:element minOccurs="0" name="identifierType" type="xs:string" />
+					<xs:element minOccurs="0" name="message" type="xs:string" />
+					<xs:element minOccurs="0" name="notFilledComments" type="xs:string" />
+					<xs:element name="success" type="xs:boolean" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:simpleType name="assemblyType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="ARTICLE" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="dataType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="CTA_DATE" />
+					<xs:enumeration value="CTA_TYPE" />
+					<xs:enumeration value="ARTICLE_LICENSE" />
+					<xs:enumeration value="COPYRIGHT_LINE" />
+					<xs:enumeration value="GENERAL_COMMENTS" />
+                    <xs:enumeration value="PRINTER_COMMENTS" />
+                    <xs:enumeration value="TYPESETTER_COMMENTS" />
+					<xs:enumeration value="COMMENTS_HEADER" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="identifierType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="AID" />
+					<xs:enumeration value="DOI" />
+					<xs:enumeration value="JPCMS_INTERNAL_ID" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="errorCode">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="500" />
+					<xs:enumeration value="505" />
+					<xs:enumeration value="510" />
+					<xs:enumeration value="515" />
+					<xs:enumeration value="520" />
+					<xs:enumeration value="535" />
+					<xs:enumeration value="540" />
+					<xs:enumeration value="545" />
+					<xs:enumeration value="550" />
+					<xs:enumeration value="555" />
+					<xs:enumeration value="560" />
+					<xs:enumeration value="565" />
+					<xs:enumeration value="570" />
+                    <xs:enumeration value="575" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="updateAssemblyDetails">
+		<wsdl:part element="tns:updateAssemblyDetails" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateAssemblyDetailsResponse">
+		<wsdl:part element="tns:updateAssemblyDetailsResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="JPCMSUpdateAssemblyService">
+		<wsdl:operation name="updateAssemblyDetails">
+			<wsdl:input message="tns:updateAssemblyDetails" name="updateAssemblyDetails">
+			</wsdl:input>
+			<wsdl:output message="tns:updateAssemblyDetailsResponse"
+				name="updateAssemblyDetailsResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="JPCMSUpdateAssemblyServiceImplServiceSoapBinding"
+		type="tns:JPCMSUpdateAssemblyService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="updateAssemblyDetails">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="updateAssemblyDetails">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="updateAssemblyDetailsResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="JPCMSUpdateAssemblyServiceImplService">
+		<wsdl:port binding="tns:JPCMSUpdateAssemblyServiceImplServiceSoapBinding"
+			name="JPCMSUpdateAssemblyServiceImplPort">
+			<soap:address location="http://localhost:9180/JPCMSUpdateAssembly" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
